@@ -109,5 +109,8 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.security:spring-security-test:5.7.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.7.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:5.7.4" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-websocket:2.7.5" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-messaging:5.3.23" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-websocket:5.3.23" level="project" />
   </component>
 </module>
