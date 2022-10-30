@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 public class ChatMessageService {
-    @Autowired private ChatMessageRepository repository;
+   /* @Autowired private ChatMessageRepository repository;
     @Autowired private ChatRoomService chatRoomService;
 
     public ChatMessage save(ChatMessage chatMessage) {
@@ -54,7 +54,7 @@ public class ChatMessageService {
         /*Query query = new Query(
                 Criteria
                         .where("senderId").is(senderId)
-                        .and("recipientId").is(recipientId));*/
+                        .and("recipientId").is(recipientId));
         Update update = Update.update("status", status);
-    }
+    }*/
 }

@@ -15,12 +15,9 @@ import java.util.Optional;
 @Service
 public class GroupServiceImpl{
 
-    private final GroupRepository groupRepository;
-
-    @Autowired
+    /*@Autowired
     protected GroupServiceImpl(GroupRepository repository) {
         super();
-        this.groupRepository = repository;
     }
 
     public void deleteById(Long id) {
@@ -36,5 +33,5 @@ public class GroupServiceImpl{
 
     public Collection<Group> findAll() {
         return null;
-    }
+    }*/
 }

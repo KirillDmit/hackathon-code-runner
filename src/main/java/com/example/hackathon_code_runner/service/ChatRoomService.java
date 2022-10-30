@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public class ChatRoomService {
 
-    @Autowired private ChatRoomRepository chatRoomRepository;
+   /* @Autowired private ChatRoomRepository chatRoomRepository;
 
     public Optional<String> getChatId(
             String senderId, String recipientId, boolean createIfNotExist) {
@@ -43,5 +43,5 @@ public class ChatRoomService {
 
                     return Optional.of(chatId);
                 });
-    }
+    }*/
 }

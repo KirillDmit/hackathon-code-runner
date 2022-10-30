@@ -22,11 +22,10 @@ import java.util.logging.Logger;
 @RequestMapping("/api")
 class GroupController {
 
-    private final Logger log = (Logger) LoggerFactory.getLogger(GroupController.class);
+    /*private final Logger log = (Logger) LoggerFactory.getLogger(GroupController.class);
 
     private final GroupServiceImpl groupService;
 
-    @Autowired
     public GroupController(GroupServiceImpl groupService) {
         this.groupService = groupService;
     }
@@ -63,5 +62,5 @@ class GroupController {
         log.info("Request to delete group: {}");
         groupService.deleteById(id);
         return ResponseEntity.ok().build();
-    }
+    }*/
 }
