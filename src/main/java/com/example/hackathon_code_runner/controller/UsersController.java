@@ -6,6 +6,7 @@ import com.example.hackathon_code_runner.storage.UserStorage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ import java.util.Collection;
 @CrossOrigin
 public class UsersController {
 
-    @GetMapping("/user/registration/")
+    @PostMapping("/user/registration/")
     public ResponseEntity<User> register(@RequestBody User user) {
         System.out.println("handling register user request: " + user.name);
         try {
@@ -26,7 +27,7 @@ public class UsersController {
         }
     }
 
-    @GetMapping("/user/login/")
+    @PostMapping("/user/login/")
     public ResponseEntity<User> login(@RequestBody User user){
         try {
             return ResponseEntity.ok(UserStorage.getInstance().getUserById(user.id));
