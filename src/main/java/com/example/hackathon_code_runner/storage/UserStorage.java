@@ -1,15 +1,17 @@
 package com.example.hackathon_code_runner.storage;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.UUID;
+import com.example.hackathon_code_runner.dao.*;
 
 public class UserStorage {
 
     private static UserStorage instance;
-    private Set<String> users;
+    private HashMap<UUID, User> users;
 
     private UserStorage() {
-        users = new HashSet<>();
+        users = new HashMap<>();
     }
 
     public static synchronized UserStorage getInstance() {
@@ -19,14 +21,14 @@ public class UserStorage {
         return instance;
     }
 
-    public Set<String> getUsers() {
-        return users;
+    public Collection<User> getUsers() {
+        return users.values();
     }
 
-    public void setUser(String userName) throws Exception {
-        if (users.contains(userName)) {
-            throw new Exception("User aready exists with userName: " + userName);
+    public void setUser(User user) throws Exception {
+        if (users.values().stream().anyMatch(u -> u.id == user.id)) {
+            throw new Exception("User aready exists with userName: " + user.name);
         }
-        users.add(userName);
+        users.put(UUID.randomUUID(), user);
     }
 }
