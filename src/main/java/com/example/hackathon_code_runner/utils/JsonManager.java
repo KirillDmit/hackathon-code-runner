@@ -9,9 +9,9 @@ public class JsonManager {
         return res;
     }
 
-    public static <T> Object deserialize(String json, T object){
+    public static <T> T deserialize(String json, Class<T> classOfT){
         var gson = new Gson();
-        var res = gson.fromJson(json, object.getClass());
+        var res = gson.fromJson(json, classOfT);
         return res;
     }
 }

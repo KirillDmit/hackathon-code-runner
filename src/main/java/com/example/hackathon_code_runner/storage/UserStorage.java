@@ -25,10 +25,20 @@ public class UserStorage {
         return users.values();
     }
 
-    public void setUser(User user) throws Exception {
-        if (users.values().stream().anyMatch(u -> u.id == user.id)) {
-            throw new Exception("User aready exists with userName: " + user.name);
+    public User getUserById(Integer id){
+        var user = users.values().stream().filter(u -> u.id == id).findFirst();
+        return user.isPresent() ? user.get() : null;
+    }
+
+    public User setUser(User user) throws Exception {
+        var oldUser = users.values().stream().filter(u -> u.id == user.id).findFirst();
+        if (oldUser.isPresent()){
+            user.private_id = oldUser.get().private_id;
+            users.put(oldUser.get().private_id, user);
+            return user;
         }
-        users.put(UUID.randomUUID(), user);
+        user.private_id = UUID.randomUUID();
+        users.put(user.private_id, user);
+        return user;
     }
 }
