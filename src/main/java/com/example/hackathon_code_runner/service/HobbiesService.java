@@ -8,12 +8,14 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.Collection;
+import java.util.List;
+
 import com.example.hackathon_code_runner.dto.HobbiesRequest;
 import com.example.hackathon_code_runner.dto.HobbiesResponse;
 import com.example.hackathon_code_runner.utils.JsonManager;
 
 public class HobbiesService {
-    public String[] getSimilarHobbies(Collection<String> input, int words_count){
+    public static String[] getSimilarHobbies(List<String> input, int words_count){
         
         try {
             var uri = new URI("http://localhost:8000/get-similar/");

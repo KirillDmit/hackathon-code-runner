@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 @RestController
@@ -60,7 +61,13 @@ public class UsersController {
 
     @GetMapping("/users/get-people-by-tag")
     public ResponseEntity<User[]> getPeopleByTag(@RequestParam String tag){
-        var users = HobbiesRepository.getInstance().getUsersWithSimilarHobbie(tag);
+        var users = HobbiesRepository.getInstance().getUsersWithEqualsHobbie(tag);
         return ResponseEntity.ok(users);
+    }
+
+    @PostMapping("/users/get-similar-users")
+    public ResponseEntity<User[]> getSimilarUsers(String[] tags){
+        var sim_tags =  HobbiesRepository.getInstance().getUsersWithSimilarTags(Arrays.asList(tags));
+        return ResponseEntity.ok(sim_tags);
     }
 }

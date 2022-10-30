@@ -1,12 +1,15 @@
 package com.example.hackathon_code_runner.storage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.hackathon_code_runner.controller.UsersController;
 import com.example.hackathon_code_runner.dao.User;
+import com.example.hackathon_code_runner.service.HobbiesService;
 
 public class HobbiesRepository {
     private static HobbiesRepository instance;
@@ -33,7 +36,7 @@ public class HobbiesRepository {
         this.hobbies.put(userId, hobbies);
     }
 
-    public User[] getUsersWithSimilarHobbie(String hobbie){
+    public User[] getUsersWithEqualsHobbie(String hobbie){
         var res = new ArrayList<User>();
 
         for (Map.Entry<Integer, List<String>> set : hobbies.entrySet()) {
@@ -43,5 +46,17 @@ public class HobbiesRepository {
 
         }
         return res.toArray(new User[0]);
+    }
+
+    public User[] getUsersWithSimilarTags(List<String> tags){
+        var hobbies = Arrays.asList(HobbiesService.getSimilarHobbies(tags, 4));
+        var res = new ArrayList<User>();
+        var users = UserStorage.getInstance().getUsers();
+        for (var user : users){
+            var u_hobs = HobbiesRepository.getInstance().getHobbiesFor(user.id);
+            if (u_hobs.stream().anyMatch(h -> hobbies.contains(h)))
+                res.add(user);
+        }
+       return res.toArray(new User[0]); 
     }
 }
