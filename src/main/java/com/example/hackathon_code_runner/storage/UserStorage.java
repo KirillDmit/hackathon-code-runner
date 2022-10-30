@@ -9,6 +9,7 @@ public class UserStorage {
 
     private static UserStorage instance;
     private HashMap<UUID, User> users;
+    private Integer iterator;
 
     private UserStorage() {
         users = new HashMap<>();
@@ -38,6 +39,7 @@ public class UserStorage {
             return user;
         }
         user.private_id = UUID.randomUUID();
+        user.id = ++iterator;
         users.put(user.private_id, user);
         return user;
     }

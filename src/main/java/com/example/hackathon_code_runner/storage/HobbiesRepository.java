@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.example.hackathon_code_runner.dao.User;
 
 public class HobbiesRepository {
     private static HobbiesRepository instance;
-    private HashMap<Integer, List<String>> hobbies;
+    private Map<Integer, List<String>> hobbies;
 
     private HobbiesRepository() {
         hobbies = new HashMap<>();
@@ -28,5 +31,17 @@ public class HobbiesRepository {
 
     public void setHobbies(Integer userId, List<String> hobbies){
         this.hobbies.put(userId, hobbies);
+    }
+
+    public User[] getUsersWithSimilarHobbie(String hobbie){
+        var res = new ArrayList<User>();
+
+        for (Map.Entry<Integer, List<String>> set : hobbies.entrySet()) {
+            for (var hob : set.getValue())
+                if (hob.equals(hobbie))
+                    res.add(UserStorage.getInstance().getUserById(set.getKey()));
+
+        }
+        return res.toArray(new User[0]);
     }
 }

@@ -1,11 +1,13 @@
 package com.example.hackathon_code_runner.controller;
 
 import com.example.hackathon_code_runner.dao.User;
+import com.example.hackathon_code_runner.storage.HobbiesRepository;
 import com.example.hackathon_code_runner.storage.UserStorage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
@@ -40,6 +42,9 @@ public class UsersController {
     }
 
 
-    // @GetMapping("/users/get-people-by-tag")
-    // public ResponseEntity<User[]> getPeopleByTag()
+    @GetMapping("/users/get-people-by-tag")
+    public ResponseEntity<User[]> getPeopleByTag(@RequestParam String tag){
+        var users = HobbiesRepository.getInstance().getUsersWithSimilarHobbie(tag);
+        return ResponseEntity.ok(users);
+    }
 }
