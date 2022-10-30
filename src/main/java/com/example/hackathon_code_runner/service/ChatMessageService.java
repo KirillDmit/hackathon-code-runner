@@ -1,11 +1,14 @@
 package com.example.hackathon_code_runner.service;
 
-import com.example.hackathon_code_runner.models.;
+
 import com.example.hackathon_code_runner.models.ChatMessage;
 import com.example.hackathon_code_runner.models.MessageStatus;
-import com.example.hackathon_code_runner.models.;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.query.Update;
+import com.example.hackathon_code_runner.repository.ChatMessageRepository;
 import org.springframework.stereotype.Service;
+
+import javax.management.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +16,8 @@ import java.util.List;
 public class ChatMessageService {
     @Autowired private ChatMessageRepository repository;
     @Autowired private ChatRoomService chatRoomService;
-    @Autowired private MongoOperations mongoOperations;
 
     public ChatMessage save(ChatMessage chatMessage) {
-        chatMessage.setStatus(MessageStatus.RECEIVED);
         repository.save(chatMessage);
         return chatMessage;
     }
@@ -39,23 +40,21 @@ public class ChatMessageService {
         return messages;
     }
 
-    public ChatMessage findById(String id) {
+    public ChatMessage findById(String id) throws Exception {
         return repository
                 .findById(id)
                 .map(chatMessage -> {
-                    chatMessage.setStatus(MessageStatus.DELIVERED);
                     return repository.save(chatMessage);
                 })
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("can't find message (" + id + ")"));
+                        new Exception("can't find message (" + id + ")"));
     }
 
     public void updateStatuses(String senderId, String recipientId, MessageStatus status) {
-        Query query = new Query(
+        /*Query query = new Query(
                 Criteria
                         .where("senderId").is(senderId)
-                        .and("recipientId").is(recipientId));
+                        .and("recipientId").is(recipientId));*/
         Update update = Update.update("status", status);
-        mongoOperations.updateMulti(query, update, ChatMessage.class);
     }
 }
