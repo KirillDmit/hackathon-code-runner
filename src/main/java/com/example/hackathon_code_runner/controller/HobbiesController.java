@@ -2,7 +2,6 @@ package com.example.hackathon_code_runner.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.hackathon_code_runner.dto.GetHobbiesModel;

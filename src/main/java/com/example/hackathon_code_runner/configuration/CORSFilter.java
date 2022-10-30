@@ -22,6 +22,8 @@ public class CORSFilter {
             response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
             response.setHeader("Access-Control-Max-Age", "3600");
             response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+            response.setHeader("X-Content-Security-Policy", "default-src *; connect-src *; script-src *; object-src *;");
+            response.setHeader("X-Webkit-CSP", "default-src *; connect-src *; script-src 'unsafe-inline' 'unsafe-eval' *; object-src *;");
             chain.doFilter(req, res);
         }
 

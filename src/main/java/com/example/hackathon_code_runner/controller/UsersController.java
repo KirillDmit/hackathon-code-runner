@@ -1,6 +1,7 @@
 package com.example.hackathon_code_runner.controller;
 
 import com.example.hackathon_code_runner.dao.User;
+import com.example.hackathon_code_runner.dto.GetUserAndTagsModel;
 import com.example.hackathon_code_runner.storage.HobbiesRepository;
 import com.example.hackathon_code_runner.storage.UserStorage;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +29,23 @@ public class UsersController {
     }
 
     @PostMapping("/user/login/")
-    public ResponseEntity<User> login(@RequestBody User user){
+    public ResponseEntity<GetUserAndTagsModel> login(@RequestBody User user){
         try {
-            return ResponseEntity.ok(UserStorage.getInstance().getUserById(user.id));
+            var u = UserStorage.getInstance().getUserById(user.id);
+            var res = new GetUserAndTagsModel();
+            res.id = u.id;
+            res.location = u.location;
+            res.login = u.login;
+            res.name = u.name;
+            res.password = u.password;
+            res.patronymic = u.patronymic;
+            res.phone = u.phone;
+            res.private_id = u.private_id;
+            res.socialNetwork = u.socialNetwork;
+            res.specialization = u.specialization;
+            res.surname = u.surname;
+            res.tokens = HobbiesRepository.getInstance().getHobbiesFor(u.id).toArray(new String[0]);
+            
         } catch (Exception e) {
             // TODO: handle exception
         }
